@@ -19,6 +19,7 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
+          <button mat-button (click)="goBack()">BACK</button>
           <button mat-button>LIKE</button>
           <button mat-button>SHARE</button>
         </mat-card-actions>
@@ -49,3 +50,29 @@
       </mat-card>
     </div>
 </div>
+
+<!-- 
+<div class="container"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.gt-md="space-around center"
+    fxLayoutGap="10px" 
+    fxLayoutGap.xs="0">
+
+
+
+    <div fxFlex="40">
+      <mat-list *ngIf="dish">
+      <h3>Comments</h3>
+        <mat-list-item *ngFor="let comment of dish.comments">
+          <h4 matline>{{comment.comment}} </h4>
+          <p matline>{{comment.rating}} Stars </p>
+          <p matline>
+            <span> -- {{comment.author}} {{comment.date | date}}</span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+</div> -->
