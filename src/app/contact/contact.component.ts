@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ContactType, Feedback } from '../shared/feedback';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
+import { ContactType, Feedback } from "../shared/feedback";
 
 @Component({
   selector: 'app-contact',
@@ -46,6 +47,7 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
+    
     this.feedbackFormDirective.resetForm();
   }
 
