@@ -39,7 +39,7 @@
       </div>
     </div>
   </div>
-  
+
   <div fxFlex>
     <mat-card>
       <blockquote>
@@ -53,7 +53,7 @@
     </mat-card>
   </div>
 
-  <div fxFlex>
+  <div fxFlex *ngIf="leader">
     <mat-list>
       <mat-card-header>
         <mat-card-title>
@@ -67,6 +67,10 @@
         <p matLine> {{row.description}} </p>
       </mat-list-item>
     </mat-list>
+  </div>
+
+  <div [hidden]="leader">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
 
 </div>
