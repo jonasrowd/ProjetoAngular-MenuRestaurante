@@ -25,6 +25,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MenuComponent } from "./menu/menu.component";
 import { NgModule } from "@angular/core";
 import { PromotionService } from "./services/promotion.service";
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { PromotionService } from "./services/promotion.service";
     ReactiveFormsModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule 
   ],
   providers: [
     DishService,
