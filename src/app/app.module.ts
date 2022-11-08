@@ -1,3 +1,4 @@
+import { BaseURL } from './shared/baseurl';
 import "hammerjs";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -26,6 +27,7 @@ import { MenuComponent } from "./menu/menu.component";
 import { NgModule } from "@angular/core";
 import { PromotionService } from "./services/promotion.service";
 import { MatSliderModule } from '@angular/material/slider';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -58,12 +60,14 @@ import { MatSliderModule } from '@angular/material/slider';
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    MatSliderModule 
+    MatSliderModule,
+    HttpClientModule
   ],
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    { provide: 'BaseURL', useValue: BaseURL }
   ],
   entryComponents: [
     LoginComponent
