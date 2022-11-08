@@ -57,6 +57,7 @@ export class DishdetailComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+
     this.dishService
       .getDishIds()
       .subscribe((dishIds) => (this.dishIds = dishIds));
@@ -67,6 +68,7 @@ export class DishdetailComponent implements OnInit {
       .subscribe(
         (dish) => {
           this.dish = dish;
+          this.dishcopy = dish;
           this.setPrevNext(dish.id);
         },
         (errmess) => (this.errMess = <any>errmess)
@@ -94,6 +96,26 @@ export class DishdetailComponent implements OnInit {
     this.onValueChanged(); // (re)set validation messages now
   }
 
+  onSubmit() {
+    this.comment = this.commentForm.value;
+    this.comment.date = new Date().toISOString();
+    console.log(this.comment);
+    console.table(this.commentForm.value);
+    this.dishcopy.comments.push(this.comment);
+    this.dishService.putDish(this.dishcopy)
+    .subscribe(dish => {
+      this.dish = dish; this.dishcopy = dish;
+    },
+    errmess => {this.dish = null; this.dishcopy = null; this.errMess = <any>errmess;});
+    this.commentFormDirective.resetForm();
+    this.commentForm.reset({
+      name: "",
+      rating: 5,
+      message: "",
+    });
+
+  }
+
   onValueChanged(data?: any) {
     if (!this.commentForm) {
       return;
@@ -114,19 +136,6 @@ export class DishdetailComponent implements OnInit {
         }
       }
     }
-  }
-
-  onSubmit() {
-    this.comment = this.commentForm.value;
-    console.log(this.comment);
-    console.table(this.commentForm.value);
-    this.commentForm.reset({
-      name: "",
-      rating: 5,
-      message: "",
-    });
-
-    this.commentFormDirective.resetForm();
   }
 
   setPrevNext(dishId: string) {
