@@ -1,3 +1,4 @@
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { BaseURL } from './shared/baseurl';
 import "hammerjs";
 
@@ -67,6 +68,7 @@ import { HttpClientModule } from "@angular/common/http";
     DishService,
     PromotionService,
     LeaderService,
+    ProcessHTTPMsgService,
     { provide: 'BaseURL', useValue: BaseURL }
   ],
   entryComponents: [

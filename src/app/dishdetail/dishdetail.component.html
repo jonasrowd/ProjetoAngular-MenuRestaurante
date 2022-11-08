@@ -29,6 +29,8 @@
     </mat-card>
   </div>
 
+
+
   <div fxFlex="40" *ngIf="dish">
     <mat-list>
       <h3>Comments</h3>
@@ -73,6 +75,14 @@
       </p>
       <button type="submit" [disabled]="!commentForm.valid" mat-button class="background-primary text-floral-white">Submit</button>
     </form>
+  </div>
+
+  <div fxFlex [hidden]="dish || errMess">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
   </div>
 
 </div>
