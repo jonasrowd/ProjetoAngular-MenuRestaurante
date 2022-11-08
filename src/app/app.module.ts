@@ -29,6 +29,7 @@ import { NgModule } from "@angular/core";
 import { PromotionService } from "./services/promotion.service";
 import { MatSliderModule } from '@angular/material/slider';
 import { HttpClientModule } from "@angular/common/http";
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HttpClientModule } from "@angular/common/http";
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
