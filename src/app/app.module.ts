@@ -1,3 +1,4 @@
+import { FeedbackService } from './services/feedback.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { BaseURL } from './shared/baseurl';
 import "hammerjs";
@@ -71,6 +72,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     PromotionService,
     LeaderService,
     ProcessHTTPMsgService,
+    FeedbackService,
     { provide: 'BaseURL', useValue: BaseURL }
   ],
   entryComponents: [

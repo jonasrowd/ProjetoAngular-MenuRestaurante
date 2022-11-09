@@ -6,7 +6,7 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
-    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
+    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]="expand">
       <mat-card>
       <mat-card-header>
         <mat-card-title>
@@ -29,8 +29,6 @@
     </mat-card>
   </div>
 
-
-
   <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
     <mat-list>
       <h3>Comments</h3>
@@ -44,14 +42,14 @@
       <mat-list-item *ngIf="commentForm.status === 'VALID'">
         <h4 matLine> {{ commentForm.value.comment }}</h4>
         <p matLine > {{ commentForm.value.rating }} Stars</p>
-        <p matLine >-- {{ commentForm.value.name }} {{ date | date }}</p>
+        <p matLine >-- {{ commentForm.value.author }} <!--{{ date | date }}--></p>
       </mat-list-item>
     </mat-list>
     <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field class="full-width">
-          <input matInput formControlName="name" placeholder="Name" type="text" required>
-          <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
+          <input matInput formControlName="author" placeholder="Name" type="text" required>
+          <mat-error *ngIf="formErrors.author">{{formErrors.author}}</mat-error>
         </mat-form-field>
         <span class="flex-spacer"></span>
       </p>
@@ -76,13 +74,4 @@
       <button type="submit" [disabled]="!commentForm.valid" mat-button class="background-primary text-floral-white">Submit</button>
     </form>
   </div>
-
-  <div fxFlex [hidden]="dish || errMess">
-    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
-  </div>
-  <div fxFlex *ngIf="errMess">
-    <h2>Error</h2>
-    <h4>{{errMess}}</h4>
-  </div>
-
 </div>

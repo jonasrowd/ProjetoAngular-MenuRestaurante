@@ -1,4 +1,3 @@
-import { BaseURL } from "./../shared/baseurl";
 import { Location } from "@angular/common";
 import { Component, OnInit, ViewChild, Inject } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -8,14 +7,25 @@ import { switchMap } from "rxjs/operators";
 import { Comment } from "../shared/comment";
 import { DishService } from "../services/dish.service";
 import { Dish } from "../shared/dish";
-import { InjectFlags } from "@angular/compiler/src/core";
+import { flyInOut, visibility, expand } from "../animations/app.animation";
 
 @Component({
   selector: "app-dishdetail",
   templateUrl: "./dishdetail.component.html",
   styleUrls: ["./dishdetail.component.scss"],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+  },
+  // tslint:disable-next-line:use-host-property-decorator
+  animations:[
+    visibility(),
+    flyInOut(),
+    expand()
+  ]
 })
 export class DishdetailComponent implements OnInit {
+
   @ViewChild("cform") commentFormDirective;
 
   dish: Dish;
@@ -28,22 +38,22 @@ export class DishdetailComponent implements OnInit {
   visibility = "shown";
   favorite = false;
   formErrors = {
-    name: "",
-    comment: "",
+    'author': "",
+    'comment': "",
   };
 
   validationMessages = {
-    name: {
-      required: "Name is required.",
-      minlength: "Name must be at least 2 characters long.",
-      maxlength: "Name cannot be more than 25 characters long.",
+    'author': {
+      'required': "Name is required.",
+      'minlength': "Name must be at least 2 characters long.",
+      'maxlength': "Name cannot be more than 25 characters long.",
     },
-    comment: {
-      required: "Comment is required.",
+    'comment': {
+      'required': "Comment is required.",
     },
   };
 
-  date: Date = new Date();
+  // date: Date = new Date(); Instanciei a data assim e coloquei diretamente no HTML o que resolvia o problema anteriormente
 
   commentForm: FormGroup;
 
@@ -52,8 +62,7 @@ export class DishdetailComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private fb: FormBuilder,
-    @Inject("BaseURL") private BaseURL
-  ) {}
+    @Inject("BaseURL") private BaseURL) {}
 
   ngOnInit() {
     this.createForm();
@@ -63,21 +72,20 @@ export class DishdetailComponent implements OnInit {
       .subscribe((dishIds) => (this.dishIds = dishIds));
     this.route.params
       .pipe(
-        switchMap((params: Params) => this.dishService.getDish(params["id"]))
-      )
+        switchMap((params: Params) => { this.visibility ='hidden'; return this.dishService.getDish(params["id"]); }))
       .subscribe(
-        (dish) => {
+        dish => {
           this.dish = dish;
           this.dishcopy = dish;
-          this.setPrevNext(dish.id);
+          this.setPrevNext(dish.id); this.visibility = 'shown';
         },
-        (errmess) => (this.errMess = <any>errmess)
+        errmess => this.errMess = <any>errmess
       );
   }
 
   createForm() {
     this.commentForm = this.fb.group({
-      name: [
+      author: [
         "",
         [
           Validators.required,
@@ -100,7 +108,6 @@ export class DishdetailComponent implements OnInit {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString();
     console.log(this.comment);
-    console.table(this.commentForm.value);
     this.dishcopy.comments.push(this.comment);
     this.dishService.putDish(this.dishcopy)
     .subscribe(dish => {
@@ -109,7 +116,7 @@ export class DishdetailComponent implements OnInit {
     errmess => {this.dish = null; this.dishcopy = null; this.errMess = <any>errmess;});
     this.commentFormDirective.resetForm();
     this.commentForm.reset({
-      name: "",
+      author: "",
       rating: 5,
       message: "",
     });
