@@ -27,6 +27,7 @@ export class ContactComponent implements OnInit {
   contactType = ContactType;
   submitted = null;
   showForm = true;
+  errMess: string;
 
   formErrors = {
     'firstname': '',
@@ -88,9 +89,9 @@ export class ContactComponent implements OnInit {
       .subscribe(feedback => {
         this.submitted = feedback;
         this.feedback = null;
-        setTimeout(() => { this.submitted = null; this.showForm = true; }, 5000);
+        // setTimeout(() => { this.submitted = null; this.showForm = true; }, 5000);
     },
-      error => console.log(error.status, error.message)
+      errmess => {this.feedback = null; this.errMess = <any>errmess;}
     );
     this.feedbackForm.reset({
       firstname: '',

@@ -81,9 +81,13 @@
     </form>
 
   </div>
-  <div [hidden]="showForm || submitted" [@expand]>
+  <div [hidden]="showForm || submitted || errMess" [@expand]>
     <h3>Submitting Form</h3>
     <mat-spinner></mat-spinner>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
   </div>
   <div *ngIf="submitted" [@expand]>
     <h3>Your Submission</h3>
