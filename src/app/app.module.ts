@@ -1,3 +1,4 @@
+import { ImgURL } from './shared/imgURL';
 import { FeedbackService } from './services/feedback.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { BaseURL } from './shared/baseurl';
@@ -73,7 +74,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     LeaderService,
     ProcessHTTPMsgService,
     FeedbackService,
-    { provide: 'BaseURL', useValue: BaseURL }
+    { provide: 'BaseURL', useValue: BaseURL },
+    { provide: 'ImgURL', useValue: ImgURL}
   ],
   entryComponents: [
     LoginComponent

@@ -62,7 +62,8 @@ export class DishdetailComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private fb: FormBuilder,
-    @Inject("BaseURL") private BaseURL) {}
+    @Inject("BaseURL") private BaseURL,
+    @Inject("ImgURL") private ImgURL) {}
 
   ngOnInit() {
     this.createForm();
