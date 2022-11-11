@@ -1,1 +1,1 @@
-export const BaseURL = 'http://localhost:3000/';
+export const BaseURL = 'https://my-json-server.typicode.com/jonasrowd/dbteste/';
