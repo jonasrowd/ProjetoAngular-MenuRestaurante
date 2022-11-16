@@ -39,7 +39,7 @@
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
     
-    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()" *ngIf="showForm" [@expand]>
+    <form novalidate *ngIf="showForm" [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()" [@expand]="expand">
       <p>
         <mat-form-field class="half-width">
           <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
